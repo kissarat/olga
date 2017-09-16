@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Simple CSS Animations</title>
+    <meta property="og:image" content="images/olga-background.jpg"/>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet"/>
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+            text-align: center;
+        }
+
+        #source > div {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        #source img {
+            width: 50%;
+        }
+
+        #foreground > img {
+            background-image: url("https://images.pond5.com/realistic-light-rain-near-far-footage-042449450_iconm.jpeg");
+        }
+
+        .size, #source img {
+            border: 1px solid black;
+        }
+
+        a {
+            color: black;
+            text-decoration: none;
+        }
+
+        .size {
+            position: relative;
+            width: 898px;
+            height: 788px;
+            margin: auto;
+        }
+
+        .size > img {
+            position: absolute;
+            left: 0;
+        }
+
+        /* ----- hue ----- */
+
+        #hue .foreground {
+            animation: hue 3s infinite;
+        }
+
+        @keyframes hue {
+            from {
+                filter: hue-rotate(0deg);
+            }
+
+            50% {
+                filter: hue-rotate(180deg);
+            }
+
+            to {
+                filter: hue-rotate(360deg);
+            }
+        }
+
+        /* ----- grayscale ----- */
+
+        #grayscale .foreground {
+            animation: grayscale-foreground 6s infinite;
+        }
+
+        #grayscale .background {
+            animation: grayscale-background 6s infinite;
+        }
+
+        @keyframes grayscale-foreground {
+            from {
+                filter: grayscale(0);
+            }
+
+            40% {
+                filter: grayscale(1);
+            }
+
+            80% {
+                filter: grayscale(0);
+            }
+        }
+
+        @keyframes grayscale-background {
+            20% {
+                filter: grayscale(0);
+            }
+
+            60% {
+                filter: grayscale(1);
+            }
+
+            to {
+                filter: grayscale(0);
+            }
+        }
+
+        /* ----- opacity ----- */
+
+        #opacity .foreground {
+            animation: opacity 3s infinite;
+        }
+
+        #opacity .background {
+            visibility: hidden;
+        }
+
+        @keyframes opacity {
+            from {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.2;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* ----- blur ----- */
+
+        #blur .foreground {
+            animation: blur 3s infinite;
+        }
+
+        #blur .background {
+            opacity: 0.3;
+        }
+
+        @keyframes blur {
+            from {
+                filter: blur(0);
+            }
+
+            50% {
+                filter: blur(3px);
+            }
+
+            to {
+                filter: blur(0);
+            }
+        }
+
+        /* ----- saturate ----- */
+
+        #saturate .foreground {
+            animation: saturate-foreground 6s infinite;
+        }
+
+        #grayscale .background {
+            animation: saturate-background 6s infinite;
+        }
+
+        @keyframes saturate-foreground {
+            from {
+                filter: saturate(0.5);
+            }
+
+            40% {
+                filter: saturate(3);
+            }
+
+            80% {
+                filter: saturate(0.5);
+            }
+        }
+
+        @keyframes saturate-background {
+            20% {
+                filter: saturate(0);
+            }
+
+            40% {
+                filter: saturate(3);
+            }
+
+            to {
+                filter: saturate(0);
+            }
+        }
+
+        /* ----- sepia ----- */
+
+        #sepia .foreground {
+            opacity: 0.3;
+            filter: grayscale(1);
+        }
+
+        #sepia .background {
+            animation: sepia 3s infinite;
+        }
+
+        @keyframes sepia {
+            from {
+                filter: sepia(0);
+            }
+
+            50% {
+                filter: sepia(1);
+            }
+
+            to {
+                filter: sepia(0);
+            }
+        }
+
+        /* ----- contrast ----- */
+
+        #contrast .foreground {
+            animation: contrast 3s infinite;
+        }
+
+        #contrast .background {
+            visibility: hidden;
+        }
+
+        @keyframes contrast {
+            from {
+                filter: contrast(0);
+            }
+
+            50% {
+                filter: contrast(1);
+            }
+
+            to {
+                filter: contrast(0);
+            }
+        }
+
+        /* ----- invert ----- */
+
+        #invert .background {
+            visibility: hidden;
+        }
+
+        #invert .foreground {
+            animation: invert 3s infinite;
+        }
+
+        @keyframes invert {
+            from {
+                filter: invert(0) hue-rotate(160deg);
+            }
+
+            50% {
+                filter: invert(1) hue-rotate(160deg);
+            }
+
+            to {
+                filter: invert(0) hue-rotate(160deg);
+            }
+        }
+
+        /* ----- drop-shadow ----- */
+
+        #drop-shadow .background {
+            visibility: hidden;
+        }
+
+        #drop-shadow .foreground {
+            animation: drop-shadow 3s infinite;
+        }
+
+        @keyframes drop-shadow {
+            from {
+                filter: drop-shadow(0);
+            }
+
+            50% {
+                filter: drop-shadow(6px 6px 10px rgba(0, 0, 0, 0.9));
+            }
+
+            to {
+                filter: drop-shadow(0);
+            }
+        }
+    </style>
+</head>
+<body>
+<h1>Simple CSS Animations</h1>
+<div id="source">
+    <h2>Source</h2>
+    <div>
+        <figure id="background">
+            <figcaption>Background</figcaption>
+            <img class="background" src="images/olga-background.jpg"/>
+        </figure>
+        <figure id="foreground">
+            <figcaption>Foreground</figcaption>
+            <img class="foreground" src="images/olga-foreground.png"/>
+        </figure>
+    </div>
+</div>
+<main>
+    <a href="#hue" id="hue">
+        <h2>Hue Rotate</h2>
+        <div class="size">
+            <img class="background" src="images/olga-background.jpg"/>
+            <img class="foreground" src="images/olga-foreground.png"/>
+        </div>
+    </a>
+    <a href="#grayscale" id="grayscale">
+        <h2>Grayscale</h2>
+        <div class="size">
+            <img class="background" src="images/olga-background.jpg"/>
+            <img class="foreground" src="images/olga-foreground.png"/>
+        </div>
+    </a>
+    <a href="#opacity" id="opacity">
+        <h2>Opacity</h2>
+        <div class="size">
+            <img class="background" src="images/olga-background.jpg"/>
+            <img class="foreground" src="images/olga-foreground.png"/>
+        </div>
+    </a>
+    <a href="#blur" id="blur">
+        <h2>Blur</h2>
+        <div class="size">
+            <img class="background" src="images/olga-background.jpg"/>
+            <img class="foreground" src="images/olga-foreground.png"/>
+        </div>
+    </a>
+    <a href="#saturate" id="saturate">
+        <h2>Saturate</h2>
+        <div class="size">
+            <img class="background" src="images/olga-background.jpg"/>
+            <img class="foreground" src="images/olga-foreground.png"/>
+        </div>
+    </a>
+    <a href="#sepia" id="sepia">
+        <h2>Sepia</h2>
+        <div class="size">
+            <img class="background" src="images/olga-background.jpg"/>
+            <img class="foreground" src="images/olga-foreground.png"/>
+        </div>
+    </a>
+    <a href="#contrast" id="contrast">
+        <h2>Contrast</h2>
+        <div class="size">
+            <img class="background" src="images/olga-background.jpg"/>
+            <img class="foreground" src="images/olga-foreground.png"/>
+        </div>
+    </a>
+    <a href="#invert" id="invert">
+        <h2>Invert</h2>
+        <div class="size">
+            <img class="background" src="images/olga-background.jpg"/>
+            <img class="foreground" src="images/olga-foreground.png"/>
+        </div>
+    </a>
+    <a href="#drop-shadow" id="drop-shadow">
+        <h2>Drop Shadow</h2>
+        <div class="size">
+            <img class="background" src="images/olga-background.jpg"/>
+            <img class="foreground" src="images/olga-foreground.png"/>
+        </div>
+    </a>
+</main>
+</body>
+</html>
