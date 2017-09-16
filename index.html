@@ -368,6 +368,7 @@
     </a>
 </main>
 
+<audio autoplay/>
 <script>
   const back = /back=([^&]+)/.exec(location.search)
   const fore = /fore=([^&]+)/.exec(location.search)
@@ -379,10 +380,10 @@
       const style = document.styleSheets[1].rules[0].style
       style.width = image.width + 'px'
       style.height = image.height + 'px'
-      for(const backImage of document.querySelectorAll('.background')) {
+      for (const backImage of document.querySelectorAll('.background')) {
         backImage.src = back[1]
       }
-      for(const foreImage of document.querySelectorAll('.foreground')) {
+      for (const foreImage of document.querySelectorAll('.foreground')) {
         foreImage.src = fore[1]
       }
       if (double) {
@@ -390,6 +391,12 @@
       }
     })
   }
+  document.addEventListener('DOMContentLoaded', function () {
+    const src = /audio=([^&]+)/.exec(location.search)
+    if (src) {
+      document.querySelector('audio').src = src[1]
+    }
+  })
 </script>
 </body>
 </html>
