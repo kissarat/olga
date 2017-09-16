@@ -6,6 +6,13 @@
     <meta property="og:image" content="images/olga-background.jpg"/>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet"/>
     <style>
+        .size {
+            position: relative;
+            width: 898px;
+            height: 788px;
+            margin: auto;
+        }
+
         body {
             font-family: 'Open Sans', sans-serif;
             text-align: center;
@@ -31,13 +38,6 @@
         a {
             color: black;
             text-decoration: none;
-        }
-
-        .size {
-            position: relative;
-            width: 898px;
-            height: 788px;
-            margin: auto;
         }
 
         .size > img {
@@ -109,7 +109,7 @@
             animation: opacity 3s infinite;
         }
 
-        #opacity .background {
+        .single #opacity .background {
             visibility: hidden;
         }
 
@@ -133,7 +133,7 @@
             animation: blur 3s infinite;
         }
 
-        #blur .background {
+        .single #blur .background {
             opacity: 0.3;
         }
 
@@ -157,7 +157,7 @@
             animation: saturate-foreground 6s infinite;
         }
 
-        #grayscale .background {
+        #saturate .background {
             animation: saturate-background 6s infinite;
         }
 
@@ -191,7 +191,7 @@
 
         /* ----- sepia ----- */
 
-        #sepia .foreground {
+        .single #sepia .foreground {
             opacity: 0.3;
             filter: grayscale(1);
         }
@@ -220,7 +220,7 @@
             animation: contrast 3s infinite;
         }
 
-        #contrast .background {
+        .single #contrast .background {
             visibility: hidden;
         }
 
@@ -240,7 +240,7 @@
 
         /* ----- invert ----- */
 
-        #invert .background {
+        .single #invert .background {
             visibility: hidden;
         }
 
@@ -264,7 +264,7 @@
 
         /* ----- drop-shadow ----- */
 
-        #drop-shadow .background {
+        .single #drop-shadow .background {
             visibility: hidden;
         }
 
@@ -302,7 +302,7 @@
         </figure>
     </div>
 </div>
-<main>
+<main class="single">
     <a href="#hue" id="hue">
         <h2>Hue Rotate</h2>
         <div class="size">
@@ -367,5 +367,29 @@
         </div>
     </a>
 </main>
+
+<script>
+  const back = /back=([^&]+)/.exec(location.search)
+  const fore = /fore=([^&]+)/.exec(location.search)
+  const double = location.search.indexOf('double=1') >= 0
+  if (back && fore) {
+    const image = new Image()
+    image.src = back[1]
+    image.addEventListener('load', function () {
+      const style = document.styleSheets[1].rules[0].style
+      style.width = image.width + 'px'
+      style.height = image.height + 'px'
+      for(const backImage of document.querySelectorAll('.background')) {
+        backImage.src = back[1]
+      }
+      for(const foreImage of document.querySelectorAll('.foreground')) {
+        foreImage.src = fore[1]
+      }
+      if (double) {
+        document.querySelector('main').classList.remove('single')
+      }
+    })
+  }
+</script>
 </body>
 </html>
